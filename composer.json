@@ -1,0 +1,42 @@
+{
+  "name": "bonk007/system-settings",
+  "description": "Dynamic settings for application",
+  "authors": [
+    {
+      "name": "Ayi Muhammad Iqbal Nasuha",
+      "email": "me@ibonk.id"
+    }
+  ],
+  "keywords": ["php", "system-settings", "laravel"],
+  "license": "MIT",
+  "require": {
+    "php": "^8.1|^8.2",
+    "laravel/framework": "^10.0|^11.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0|^11.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Settings\\SystemSettingServiceProvider"
+      ]
+    }
+  },
+  "autoload": {
+    "files": ["helpers.php"],
+    "psr-4": {
+      "Settings\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Settings\\Tests\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  } ,
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
