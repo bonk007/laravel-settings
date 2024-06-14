@@ -13,7 +13,7 @@ Laravel Settings
 # Install
 Install the package using composer 
 ``` 
-composer require bonk007/laravel-settings
+composer require bonk007/system-settings
 ``` 
 then run migration 
 ```
