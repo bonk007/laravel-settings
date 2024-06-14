@@ -82,7 +82,7 @@ settings->unset('<group>.<key>.<table of configurable model>.<primary key>')
 or 
 ```php
 settings()->for(<configurable model>)
-  ->unset('<group>.<key>', <default value>);
+  ->unset('<group>.<key>');
 ```
 
 example
