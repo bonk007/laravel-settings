@@ -1,5 +1,10 @@
 Laravel Settings
 =======================
+![Packagist Downloads](https://img.shields.io/packagist/dt/bonk007/system-settings)
+![GitHub License](https://img.shields.io/github/license/bonk007/laravel-settings)
+![Packagist Stars](https://img.shields.io/packagist/stars/bonk007/system-settings)
+![GitHub forks](https://img.shields.io/github/forks/bonk007/laravel-settings)
+
 1. [Install](#install)
 2. [How to](#how-to)
    - [Set Value](#set-settings-value)

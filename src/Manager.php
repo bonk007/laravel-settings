@@ -24,29 +24,51 @@ class Manager
      */
     public static string $settingsTableName = 'system_settings';
 
+    /**
+     * Determines cache prefix key
+     * @var string
+     */
     public static string $cachePrefix = 'system_settings';
 
+    /**
+     * Configurable model instance
+     * @var \Settings\Contracts\Configurable|null
+     */
     protected ?Configurable $configurable = null;
 
+    /**
+     * Value adapter instance
+     * @var \Settings\ValueAdapter
+     */
     protected ValueAdapter $adapter;
 
     /**
-     *
+     * Determines the settings value will be stored to cache or not
      * @var bool
      */
     protected bool $cached = true;
+
 
     public function __construct(protected Connection $dbConnection, protected CacheManager $cacheManager)
     {
         $this->adapter = new ValueAdapter();
     }
 
+    /**
+     * Indicates the value will be fetched directly from database rather than cache
+     * @return $this
+     */
     public function noCache(): self
     {
         $this->cached = false;
         return $this;
     }
 
+    /**
+     * Set configurable model
+     * @param \Settings\Contracts\Configurable $configurable
+     * @return $this
+     */
     public function for(Configurable $configurable): self
     {
         $this->configurable = $configurable;
@@ -54,6 +76,7 @@ class Manager
     }
 
     /**
+     * Get setting's value following the key name
      * @throws \JsonException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
@@ -88,6 +111,7 @@ class Manager
     }
 
     /**
+     * Save setting's value
      * @throws \JsonException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
@@ -100,6 +124,11 @@ class Manager
         return $this->saveToCache($key, $origin);
     }
 
+    /**
+     * Delete certain setting's value
+     * @param string $key
+     * @return bool
+     */
     public function unset(string $key): bool
     {
         $keyParts = $this->ungroupKey($key);
@@ -153,6 +182,11 @@ class Manager
 
     }
 
+    /**
+     * Get formatted cache key
+     * @param string $key
+     * @return string
+     */
     protected function getCacheKey(string $key): string
     {
         $keyParts = $this->ungroupKey($key);
@@ -165,12 +199,18 @@ class Manager
         return static::$cachePrefix . '.' .implode('.', $keyParts);
     }
 
+    /**
+     * Perform get setting's value from cache
+     * @param string $key
+     * @return mixed
+     */
     protected function fetchFromCache(string $key): mixed
     {
         return $this->cacheManager->get($this->getCacheKey($key));
     }
 
     /**
+     * Cache setting's value
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     protected function saveToCache(string $key, mixed $value): mixed
@@ -182,12 +222,18 @@ class Manager
         return $value;
     }
 
+    /**
+     * Forget setting value from cache storage
+     * @param string $key
+     * @return void
+     */
     protected function invalidateCache(string $key): void
     {
         $this->cacheManager->forget($this->getCacheKey($key));
     }
 
     /**
+     * Perform store setting's value to database
      * @throws \JsonException
      */
     protected function saveToDatabase(string $key, array $value): void
