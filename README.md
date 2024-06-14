@@ -1,5 +1,15 @@
 Laravel Settings
 =======================
+1. [Install](#install)
+2. [How to](#how-to)
+   - [Set Value](#set-settings-value)
+   - [Get Value](#get-settings-value)
+   - [Remove Value](#remove-setting)
+4. [Configurable Model](#configurable-model)
+   - [How to Define](#how-to-define)
+   - [How it works](#how-it-works)
+6. [Accepted Value](#accepted-value)
+
 # Install
 Install the package using composer 
 ``` 
